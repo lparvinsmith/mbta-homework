@@ -10,12 +10,31 @@ and stop that user is getting off at and **returns the total number of stops for
 var redLine = ['south station', 'park st', 'kendall', 'central', 'harvard', 'porter', 'davis', 'alewife'];
 var greenLine = ['haymarket', 'government center', 'park st', 'boylston', 'arlington', 'copley'];
 var orangeLine = ['north station', 'haymarket', 'park st', 'state', 'downtown crossing', 'chinatown', 'backbay', 'forest hills'];
+//array preserves order, where as object may not
 var subwayLines = {
   'red' : redLine,
   'green' : greenLine,
   'orange' : orangeLine,
 };
 var intersection = 'park st'
+
+//CLASS DEMO:
+var find = function(array, value) {
+  for (var i = 0; i < array.length; i++) {
+    if (array[i] === value) {
+      return i;
+    }
+  }
+  return - 1;
+}
+console.log(find(['a','b','c'], 'c'));
+console.log(find(['a','b','c'], 'z'));
+
+var sameLineDistace = function(line, firstStop, secondStop) {
+
+}
+
+//END CLASS DEMO
 
 var stopsToIntersection = function(line, stop) {
   //if line === 'red', find difference between indeces stop and park st in redLine
@@ -32,7 +51,7 @@ var numberOfTStops = function(entryLine, entryStop, endLine, endStop) {
   return totalStops;
 }
 
-console.log(numberOfTStops('red', 'harvard', 'orange', 'north station'));
+//console.log(numberOfTStops('red', 'harvard', 'orange', 'north station'));
 
 //try for more than one intersection
 
