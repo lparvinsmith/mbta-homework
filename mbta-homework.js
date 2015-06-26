@@ -19,6 +19,7 @@ var subwayLines = {
 var intersection = 'park st'
 
 //CLASS DEMO:
+//find function replaces indexOf
 var find = function(array, value) {
   for (var i = 0; i < array.length; i++) {
     if (array[i] === value) {
@@ -27,12 +28,28 @@ var find = function(array, value) {
   }
   return - 1;
 }
-console.log(find(['a','b','c'], 'c'));
-console.log(find(['a','b','c'], 'z'));
 
 var sameLineDistace = function(line, firstStop, secondStop) {
-
+  //find the indices of firstStop and secondStop, and subtract them
+  var diff = find(line, firstStop) - find(line, secondStop);
+  if (diff < 0) {
+    diff *= -1; //gets absolute value
+  }
+  return diff;
 }
+
+var tester = function() {
+  console.log('find');
+  console.log('* should return 2, actually returns' + find(['a','b','c'], 'c'));
+  console.log('* should return -1, actually returns' + find(['a','b','c'], 'z'));
+  console.log('* should return 1, actually returns' + sameLineDistace(redLine, 'south station', 'park st'));
+  console.log('* should return 3, actually returns' + sameLineDistace(greenLine, 'arlington', 'government center'));
+  console.log('* should return 2, actually returns' + sameLineDistace(orangeLine, 'state', 'haymarket'));
+}
+
+tester();
+
+
 
 //END CLASS DEMO
 
