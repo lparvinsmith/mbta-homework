@@ -18,7 +18,8 @@ var subwayLines = {
 };
 var intersection = 'park st'
 
-//CLASS DEMO:
+//BEGIN CLASS DEMO:
+
 //find function replaces indexOf
 var find = function(array, value) {
   for (var i = 0; i < array.length; i++) {
@@ -29,7 +30,7 @@ var find = function(array, value) {
   return - 1;
 }
 
-var sameLineDistace = function(line, firstStop, secondStop) {
+var sameLineDistance = function(line, firstStop, secondStop) {
   //find the indices of firstStop and secondStop, and subtract them
   var diff = find(line, firstStop) - find(line, secondStop);
   if (diff < 0) {
@@ -38,13 +39,28 @@ var sameLineDistace = function(line, firstStop, secondStop) {
   return diff;
 }
 
+var distance = function (firstLine, firstStop, secondLine, secondStop) {
+  //same-line case
+  if (firstLine === secondLine) {
+    return sameLineDistance(firstLine, firstStop, secondStop);
+  }
+  else { //different-lines case
+    return sameLineDistance(firstLine, firstStop, 'park st') +
+          sameLineDistance(secondLine, 'park st', secondStop);
+  }
+}
+
 var tester = function() {
   console.log('find');
-  console.log('* should return 2, actually returns' + find(['a','b','c'], 'c'));
-  console.log('* should return -1, actually returns' + find(['a','b','c'], 'z'));
-  console.log('* should return 1, actually returns' + sameLineDistace(redLine, 'south station', 'park st'));
-  console.log('* should return 3, actually returns' + sameLineDistace(greenLine, 'arlington', 'government center'));
-  console.log('* should return 2, actually returns' + sameLineDistace(orangeLine, 'state', 'haymarket'));
+  console.log('* should return 2, actually returns ' + find(['a','b','c'], 'c'));
+  console.log('* should return -1, actually returns ' + find(['a','b','c'], 'z'));
+  console.log('* should return 1, actually returns ' + sameLineDistance(redLine, 'south station', 'park st'));
+  console.log('* should return 3, actually returns ' + sameLineDistance(greenLine, 'arlington', 'government center'));
+  console.log('* should return 2, actually returns ' + sameLineDistance(orangeLine, 'state', 'haymarket'));
+  console.log('distance')
+  console.log('* should return 3, actually returns ' + distance(redLine, 'south station', orangeLine, 'downtown crossing'));
+  console.log('* should return 5, actually returns ' + distance(greenLine, 'arlington', redLine, 'harvard'));
+  console.log('* should return 5, actually returns ' + distance(orangeLine, 'chinatown', greenLine, 'haymarket'));
 }
 
 tester();
